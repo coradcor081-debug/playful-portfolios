@@ -14,6 +14,12 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import "@fontsource/archivo-black";
 import "@fontsource-variable/inter";
 import "@fontsource/space-mono";
+import "@fontsource/caveat/400.css";
+import "@fontsource/caveat/700.css";
+import "@fontsource/kalam/400.css";
+import "@fontsource/kalam/700.css";
+import "@fontsource/special-elite";
+import "@fontsource/patrick-hand";
 
 function NotFoundComponent() {
   return (
