@@ -7,11 +7,10 @@ export function BookCover() {
 
   useEffect(() => {
     if (!opening) return;
-    const t = setTimeout(() => setGone(true), 1400);
+    const t = setTimeout(() => setGone(true), 1700);
     return () => clearTimeout(t);
   }, [opening]);
 
-  // lock scroll while cover is up
   useEffect(() => {
     if (gone) return;
     const prev = document.body.style.overflow;
@@ -21,54 +20,87 @@ export function BookCover() {
 
   if (gone) return null;
 
+  const open = () => setOpening(true);
+
+  const halfBase: React.CSSProperties = {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    width: "50%",
+    backgroundImage: `url(${cover.url})`,
+    backgroundSize: "100vw 100vh",
+    backgroundRepeat: "no-repeat",
+    backfaceVisibility: "hidden",
+    transition: "transform 1.4s cubic-bezier(.7,.04,.2,1), box-shadow 1.4s ease",
+    willChange: "transform",
+  };
+
   return (
     <div
       aria-hidden={opening}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#c97f54]"
-      style={{ perspective: "2000px" }}
+      onClick={open}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && open()}
+      className="fixed inset-0 z-[100] cursor-pointer select-none overflow-hidden bg-[#1a0f08]"
+      style={{
+        perspective: "2400px",
+        perspectiveOrigin: "50% 50%",
+        transition: "opacity .5s ease 1s",
+        opacity: opening ? 0 : 1,
+      }}
     >
-      <button
-        type="button"
-        onClick={() => setOpening(true)}
-        aria-label="Open the scrapbook"
-        className="group relative h-full w-full max-w-[680px] cursor-pointer outline-none"
+      {/* Left half */}
+      <div
         style={{
-          transformStyle: "preserve-3d",
+          ...halfBase,
+          left: 0,
+          backgroundPosition: "left center",
           transformOrigin: "left center",
-          transition: "transform 1.2s cubic-bezier(.7,.05,.2,1), opacity .6s ease 0.8s",
-          transform: opening ? "rotateY(-165deg)" : "rotateY(0deg)",
-          opacity: opening ? 0 : 1,
+          transform: opening ? "rotateY(-110deg)" : "rotateY(0deg)",
           boxShadow: opening
-            ? "40px 0 80px -20px rgba(0,0,0,0.5)"
-            : "0 20px 60px -10px rgba(0,0,0,0.4)",
+            ? "inset -40px 0 60px -20px rgba(0,0,0,0.6)"
+            : "inset -8px 0 24px -10px rgba(0,0,0,0.35)",
+        }}
+      />
+      {/* Right half */}
+      <div
+        style={{
+          ...halfBase,
+          right: 0,
+          backgroundPosition: "right center",
+          transformOrigin: "right center",
+          transform: opening ? "rotateY(110deg)" : "rotateY(0deg)",
+          boxShadow: opening
+            ? "inset 40px 0 60px -20px rgba(0,0,0,0.6)"
+            : "inset 8px 0 24px -10px rgba(0,0,0,0.35)",
+        }}
+      />
+      {/* center spine seam (hidden when opening) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2"
+        style={{
+          width: 14,
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0) 100%)",
+          opacity: opening ? 0 : 1,
+          transition: "opacity .4s ease",
+        }}
+      />
+      {/* Tap to open badge */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-10 z-10 flex justify-center"
+        style={{
+          opacity: opening ? 0 : 1,
+          transition: "opacity .35s ease",
         }}
       >
-        <img
-          src={cover.url}
-          alt="Scrapbook cover"
-          className="h-full w-full object-cover object-center"
-          style={{ backfaceVisibility: "hidden" }}
-          draggable={false}
-        />
-        {/* spine shadow */}
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-8"
-          style={{
-            background: "linear-gradient(to right, rgba(0,0,0,0.35), rgba(0,0,0,0))",
-          }}
-        />
-        {/* tap to open */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-10 flex justify-center transition-opacity"
-          style={{ opacity: opening ? 0 : 1 }}
-        >
-          <span
-            className="rounded-full border-2 border-[var(--ink)] bg-[#fffdf6] px-5 py-2 font-hand text-2xl shadow-lg animate-float"
-          >
-            tap to open ✿
-          </span>
-        </div>
-      </button>
+        <span className="flex items-center gap-2 rounded-full border-2 border-[var(--ink)] bg-[#fffdf6]/95 px-6 py-2.5 font-hand text-2xl shadow-xl animate-float backdrop-blur">
+          <span className="inline-block h-2 w-2 rounded-full bg-[oklch(0.5_0.18_25)] animate-pulse" />
+          tap to open ✿
+        </span>
+      </div>
     </div>
   );
 }
