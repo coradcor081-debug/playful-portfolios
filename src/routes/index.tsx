@@ -4,6 +4,7 @@ import avatar from "@/assets/alex-avatar.jpg";
 import doodles from "@/assets/doodles.png";
 import nairobi from "@/assets/nairobi.jpg";
 import desk from "@/assets/desk.jpg";
+import { MusicPlayer } from "@/components/MusicPlayer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -79,6 +80,7 @@ function Index() {
         <Contact />
       </main>
       <Footer />
+      <MusicPlayer />
     </div>
   );
 }
