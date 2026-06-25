@@ -4,8 +4,6 @@ import avatar from "@/assets/alex-avatar.jpg";
 import doodles from "@/assets/doodles.png";
 import nairobi from "@/assets/nairobi.jpg";
 import desk from "@/assets/desk.jpg";
-import { BookCover } from "@/components/BookCover";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
