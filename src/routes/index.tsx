@@ -4,8 +4,6 @@ import avatar from "@/assets/alex-avatar.jpg";
 import doodles from "@/assets/doodles.png";
 import nairobi from "@/assets/nairobi.jpg";
 import desk from "@/assets/desk.jpg";
-import { BookCover } from "@/components/BookCover";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -70,7 +68,6 @@ const JOURNEY = [
 function Index() {
   return (
     <div className="min-h-screen text-foreground">
-      <BookCover />
       <Nav />
       <main className="mx-auto max-w-6xl px-5 pb-20">
         <Hero />
