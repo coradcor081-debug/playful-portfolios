@@ -68,7 +68,6 @@ const JOURNEY = [
 function Index() {
   return (
     <div className="min-h-screen text-foreground">
-      <BookCover />
       <Nav />
       <main className="mx-auto max-w-6xl px-5 pb-20">
         <Hero />
