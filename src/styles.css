@@ -304,6 +304,56 @@
   .animate-sway { animation: sway 6s ease-in-out infinite; }
   @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .animate-spin-slow { animation: spin-slow 3s linear infinite; }
+  @keyframes eq {
+    0% { transform: scaleY(0.3); }
+    100% { transform: scaleY(1); }
+  }
+
+  /* Scrapbook range slider */
+  .scrap-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .scrap-range::-webkit-slider-runnable-track {
+    height: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background:
+      linear-gradient(to right, var(--pop-pink) 0%, var(--pop-pink) var(--pct, 0%), #fffdf6 var(--pct, 0%), #fffdf6 100%);
+  }
+  .scrap-range::-moz-range-track {
+    height: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background:
+      linear-gradient(to right, var(--pop-pink) 0%, var(--pop-pink) var(--pct, 0%), #fffdf6 var(--pct, 0%), #fffdf6 100%);
+  }
+  .scrap-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--pop-yellow);
+    border: 2px solid var(--ink);
+    margin-top: -5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .scrap-range::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--pop-yellow);
+    border: 2px solid var(--ink);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .scrap-range-sm::-webkit-slider-runnable-track { height: 6px; }
+  .scrap-range-sm::-moz-range-track { height: 6px; }
+  .scrap-range-sm::-webkit-slider-thumb { width: 11px; height: 11px; margin-top: -4px; }
+  .scrap-range-sm::-moz-range-thumb { width: 11px; height: 11px; }
 
   .btn-scrap {
     display: inline-flex;
