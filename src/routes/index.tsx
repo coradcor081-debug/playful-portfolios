@@ -140,6 +140,8 @@ function Hero() {
 function HeroCollage() {
   return (
     <div className="relative mx-auto h-[440px] w-full max-w-md">
+      <span aria-hidden className="doodle-gojo -left-16 -top-6 hidden md:block" />
+      <span aria-hidden className="doodle-aang -right-14 bottom-[-30px] hidden md:block" />
       {/* Big polaroid */}
       <div className="polaroid absolute left-6 top-2 w-64 -rotate-[6deg] animate-sway">
         <span className="tape tape-yellow left-1/2 top-[-12px] -translate-x-1/2 rotate-[-3deg]" />
@@ -153,7 +155,7 @@ function HeroCollage() {
         <p className="mt-2 text-center font-hand text-xl">my desk</p>
       </div>
       {/* Sticky note */}
-      <div className="absolute bottom-2 left-0 w-52 rotate-[-4deg] bg-[var(--pop-yellow)] p-4 font-marker text-base shadow-lg">
+      <div className="sticky-note absolute bottom-2 left-0 w-52 rotate-[-4deg] bg-[var(--pop-yellow)] p-4 font-marker text-base">
         <span className="tape tape-pink left-1/2 top-[-10px] -translate-x-1/2 rotate-[3deg]" />
         "code with curiosity,<br />ship with care."
         <div className="mt-2 text-right font-hand text-xl">— a.n.k</div>
@@ -170,7 +172,7 @@ function Marquee() {
   const items = ["curious ✿", "playful ✺", "kind ❀", "precise ★", "shipping ✦", "learning ❉", "faith-led ✝", "Nairobi ♡"];
   const loop = [...items, ...items, ...items];
   return (
-    <div className="relative my-10 overflow-hidden border-y-2 border-dashed border-[var(--ink)] bg-[var(--pop-yellow)]/60 py-3">
+    <div className="torn-edges-y marquee-fade relative my-10 overflow-hidden border-y-2 border-dashed border-[var(--ink)] bg-[var(--pop-yellow)]/60 py-3">
       <div className="flex w-max animate-marquee gap-8 font-hand text-3xl">
         {loop.map((t, i) => (
           <span key={i} className="whitespace-nowrap">{t}</span>
@@ -227,14 +229,19 @@ function Stack() {
         <ul className="relative flex flex-wrap gap-3">
           {STACK.map((s, i) => {
             const tapes = ["tape-yellow", "tape-pink", "tape-blue", "tape-mint"];
-            const rot = ((i * 37) % 7) - 3;
+            const rot = ((i * 53) % 11) - 5;
+            const ml = i > 0 && i % 3 === 0 ? "-1rem" : undefined;
+            const mt = i % 2 ? "0.6rem" : "-0.3rem";
             return (
               <li
                 key={s}
-                style={{ transform: `rotate(${rot}deg)` }}
-                className="relative bg-[#fffdf6] px-4 py-2 font-hand text-2xl shadow-md transition hover:-translate-y-1"
+                style={{ transform: `rotate(${rot}deg)`, marginLeft: ml, marginTop: mt, boxShadow: "3px 4px 0 rgba(0,0,0,0.15), 0 6px 12px -6px rgba(60,40,20,0.3)" }}
+                className="relative bg-[#fffdf6] px-4 py-2 font-hand text-2xl transition hover:-translate-y-1"
               >
-                <span className={`tape ${tapes[i % 4]} left-1/2 top-[-10px] -translate-x-1/2 rotate-[-4deg] !w-12 !h-4`} />
+                <span
+                  className={`tape ${tapes[i % 4]} left-1/2 top-[-10px] -translate-x-1/2 !w-12 !h-4`}
+                  style={{ transform: `translateX(-50%) rotate(${((i * 17) % 24) - 12}deg)` }}
+                />
                 {s}
               </li>
             );
@@ -281,11 +288,14 @@ function Journey() {
         {JOURNEY.map((j, i) => (
           <li
             key={j.year}
-            style={{ transform: `rotate(${i % 2 ? 0.8 : -0.8}deg)` }}
+            style={{ transform: `rotate(${(i % 2 ? 1.6 : -1.8) + (i === 2 ? 0.7 : 0)}deg)`, marginTop: i > 1 ? "-0.6rem" : undefined }}
             className="paper-card relative flex gap-4 transition hover:rotate-0"
           >
-            <span className="tape tape-yellow left-4 top-[-10px] rotate-[-8deg] !w-16" />
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-2xl">
+            <span
+              className={`tape ${["tape-yellow","tape-pink","tape-blue","tape-mint"][i % 4]} left-4 top-[-10px] !w-16`}
+              style={{ transform: `rotate(${((i * 29) % 22) - 11}deg)` }}
+            />
+            <div className="puffy-sticker flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-2xl">
               {j.year}
             </div>
             <div>
@@ -337,7 +347,7 @@ function Contact() {
           </div>
         </div>
         <div className="relative">
-          <div className="paper-card relative -rotate-[1.5deg]">
+          <div className="paper-card relative -rotate-[1.5deg] overflow-hidden">
             <span className="tape tape-pink left-1/2 top-[-12px] -translate-x-1/2 rotate-[-3deg]" />
             <p className="font-hand text-2xl">— send a postcard —</p>
             <div className="mt-4 space-y-3">
@@ -357,6 +367,9 @@ function Contact() {
               </ContactRow>
             </div>
             <p className="mt-5 text-right font-hand text-xl">soli deo gloria ✝</p>
+            <span aria-hidden className="cancel-stamp -right-4 -top-4">
+              Nairobi<br/>GPO<br/>26 · VI · 26
+            </span>
           </div>
           <span className="stamp absolute -right-2 -top-6">par avion</span>
         </div>
@@ -376,8 +389,10 @@ function ContactRow({ label, children }: { label: string; children: React.ReactN
 
 function Footer() {
   return (
-    <footer className="border-t-2 border-dashed border-[var(--ink)]/30">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-8 text-center md:flex-row md:text-left">
+    <footer className="relative border-t-2 border-dashed border-[var(--ink)]/30">
+      <span aria-hidden className="doodle-aang left-4 top-2 hidden md:block" style={{ width: 80, height: 96, opacity: 0.16 }} />
+      <span aria-hidden className="doodle-gojo right-6 -top-4 hidden md:block" style={{ width: 90, height: 108, opacity: 0.16 }} />
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-8 text-center md:flex-row md:text-left">
         <p className="font-marker text-base">© {new Date().getFullYear()} Alex Njugi Karanja · built with curiosity & coffee ☕</p>
         <p className="font-hand text-2xl">the end · for now ✿</p>
       </div>
