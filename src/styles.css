@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+.animate-bob { animation: bob 2.4s ease-in-out infinite; }
+
 /*
  * Design system definition.
  *
