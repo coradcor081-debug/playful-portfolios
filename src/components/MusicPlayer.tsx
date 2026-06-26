@@ -21,7 +21,7 @@ export function MusicPlayer() {
   const [muted, setMuted] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState<"off" | "all" | "one">("off");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [queueOpen, setQueueOpen] = useState(false);
 
   const current = list[idx];
@@ -88,8 +88,12 @@ export function MusicPlayer() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open music player"
-        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-pink)] font-hand text-2xl shadow-lg transition hover:-translate-y-0.5"
-        style={{ transform: "rotate(-4deg)" }}
+        title="Open mixtape"
+        className="animate-bob fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--ink)] font-hand text-2xl text-[#fffdf6] hover:scale-105"
+        style={{
+          background: "radial-gradient(circle at 30% 30%, oklch(0.55 0.09 50), oklch(0.32 0.07 45))",
+          boxShadow: "3px 4px 0 rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.3)",
+        }}
       >
         <span className={playing ? "animate-spin-slow" : ""}>♪</span>
       </button>
@@ -104,6 +108,16 @@ export function MusicPlayer() {
       <div className="paper-card relative !p-3 !pt-4">
         <span className="tape tape-pink left-1/2 top-[-10px] -translate-x-1/2 rotate-[-4deg] !w-20 !h-4" />
         <span className="tape tape-yellow right-[-8px] top-6 rotate-[35deg] !w-12 !h-3" />
+
+        <button
+          onClick={() => setOpen(false)}
+          aria-label="Close music player"
+          title="Close"
+          className="absolute -right-2 -top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-pink)] font-hand text-sm leading-none shadow-[2px_2px_0_rgba(0,0,0,0.2)] hover:rotate-12"
+          style={{ transform: "rotate(8deg)" }}
+        >
+          ✕
+        </button>
 
         {/* Header */}
         <div className="flex items-center gap-2">
