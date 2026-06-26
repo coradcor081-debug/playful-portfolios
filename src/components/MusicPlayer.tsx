@@ -125,13 +125,6 @@ export function MusicPlayer() {
           <span className="ml-auto font-type text-[10px] tracking-widest text-muted-foreground">
             {String(idx + 1).padStart(2, "0")}/{String(list.length).padStart(2, "0")}
           </span>
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Minimize player"
-            className="ml-1 flex h-5 w-5 items-center justify-center rounded-full border border-[var(--ink)]/60 bg-[#fffdf6] font-type text-[10px] leading-none hover:bg-[var(--pop-yellow)]"
-          >
-            –
-          </button>
         </div>
 
         {/* Cassette / reels art */}
