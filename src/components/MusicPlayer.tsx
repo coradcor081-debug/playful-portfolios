@@ -82,21 +82,32 @@ export function MusicPlayer() {
   const label = `${current.title} — ${current.artist}   ✦   `;
   const pct = duration ? (progress / duration) * 100 : 0;
 
-  // Collapsed cassette badge
+  const audioEl = (
+    <audio
+      ref={audioRef}
+      src={current.src}
+      onEnded={onEnded}
+      onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
+      onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+      preload="metadata"
+    />
+  );
+
+  // Collapsed: floating beamed-note button matching the site's btn-scrap pink
   if (!open) {
     return (
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Open music player"
-        title="Open mixtape"
-        className="animate-bob fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--ink)] font-hand text-2xl text-[#fffdf6] hover:scale-105"
-        style={{
-          background: "radial-gradient(circle at 30% 30%, oklch(0.55 0.09 50), oklch(0.32 0.07 45))",
-          boxShadow: "3px 4px 0 rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.3)",
-        }}
-      >
-        <span className={playing ? "animate-spin-slow" : ""}>♪</span>
-      </button>
+      <>
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Open music player"
+          title="Open mixtape"
+          className="btn-scrap pink animate-bob fixed bottom-5 right-5 z-50 !h-14 !w-14 !p-0 justify-center !text-2xl"
+          style={{ transform: "rotate(-4deg)" }}
+        >
+          <span className={playing ? "animate-spin-slow" : ""}>♫</span>
+        </button>
+        {audioEl}
+      </>
     );
   }
 
@@ -267,15 +278,7 @@ export function MusicPlayer() {
             up next · {list[(idx + 1) % list.length].title}
           </p>
         )}
-
-        <audio
-          ref={audioRef}
-          src={current.src}
-          onEnded={onEnded}
-          onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
-          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
-          preload="metadata"
-        />
+        {audioEl}
       </div>
     </div>
   );
