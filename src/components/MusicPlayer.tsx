@@ -97,19 +97,13 @@ export function MusicPlayer() {
   if (!open) {
     return (
       <>
-        <div className="fixed bottom-5 right-5 z-50 flex flex-col items-center">
-          <span
-            className="relative mb-1.5 inline-flex items-center justify-center whitespace-nowrap rounded-sm border border-[var(--ink)]/20 bg-[#fffdf6] px-2.5 py-1 font-hand text-xs leading-none text-[var(--ink)] shadow-[2px_2px_0_rgba(0,0,0,0.15)]"
-            style={{ transform: "rotate(-2deg)" }}
-          >
-            <span className="tape tape-yellow absolute left-1/2 top-[-6px] h-2.5 w-10 -translate-x-1/2 rotate-[-2deg] !opacity-70" />
-            Play music
-          </span>
+        <div className="fixed bottom-5 right-5 z-50 flex flex-col items-center animate-bob">
+          <span className="mb-1 font-hand text-sm text-[var(--ink)]">Play music</span>
           <button
             onClick={() => setOpen(true)}
             aria-label="Open music player"
             title="Open mixtape"
-            className="btn-scrap pink animate-bob !h-14 !w-14 !p-0 justify-center !text-2xl"
+            className="btn-scrap pink !h-14 !w-14 !p-0 justify-center !text-2xl"
             style={{ transform: "rotate(-4deg)" }}
           >
             <span className={playing ? "animate-spin-slow" : ""}>♫</span>
