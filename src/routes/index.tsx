@@ -68,9 +68,9 @@ const JOURNEY = [
 
 function Index() {
   return (
-    <div className="min-h-screen text-foreground">
+    <div className="min-h-screen overflow-x-hidden text-foreground">
       <Nav />
-      <main className="mx-auto max-w-6xl px-5 pb-20">
+      <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-5">
         <Hero />
         <Marquee />
         <About />
@@ -86,13 +86,20 @@ function Index() {
 }
 
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
   return (
-    <header className="sticky top-3 z-40 mx-auto mt-3 max-w-6xl px-5">
-      <div className="relative flex items-center justify-between rounded-full border-2 border-[var(--ink)] bg-[#fffdf6]/90 px-4 py-2 backdrop-blur">
+    <header className="sticky top-2 z-40 mx-auto mt-2 max-w-6xl px-3 sm:top-3 sm:mt-3 sm:px-5">
+      <div className="relative flex items-center justify-between rounded-full border-2 border-[var(--ink)] bg-[#fffdf6]/90 px-3 py-2 backdrop-blur sm:px-4">
         <span className="tape tape-pink left-1/2 top-[-12px] -translate-x-1/2 rotate-[-4deg]" />
-        <a href="#top" className="flex items-center gap-2 font-hand text-3xl leading-none">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-type text-sm">A</span>
-          alex's scrapbook
+        <a href="#top" className="flex min-w-0 items-center gap-2 font-hand text-2xl leading-none sm:text-3xl">
+          <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-type text-xs sm:h-9 sm:w-9 sm:text-sm">A</span>
+          <span className="truncate">alex's scrapbook</span>
         </a>
         <nav className="hidden gap-1 md:flex">
           {NAV.map((n) => (
@@ -102,6 +109,54 @@ function Nav() {
           ))}
         </nav>
         <a href="#contact" className="btn-scrap pink hidden md:inline-flex">say hi ✿</a>
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] shadow-[2px_2px_0_rgba(0,0,0,0.2)] md:hidden"
+        >
+          <span className="relative block h-4 w-5">
+            <span className={`absolute left-0 right-0 h-[2.5px] rounded-full bg-[var(--ink)] transition-all ${menuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"}`} />
+            <span className={`absolute left-0 right-0 top-1/2 h-[2.5px] -translate-y-1/2 rounded-full bg-[var(--ink)] transition-all ${menuOpen ? "opacity-0" : "opacity-100"}`} />
+            <span className={`absolute left-0 right-0 h-[2.5px] rounded-full bg-[var(--ink)] transition-all ${menuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"}`} />
+          </span>
+        </button>
+      </div>
+      {/* Mobile dropdown */}
+      <div
+        className={`md:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        aria-hidden={!menuOpen}
+      >
+        <div
+          className={`mt-2 origin-top transition-all duration-300 ${menuOpen ? "scale-y-100 opacity-100" : "scale-y-90 opacity-0"}`}
+        >
+          <div className="relative mx-auto max-w-md rounded-[10px] border-2 border-[var(--ink)] bg-[#fffdf6] p-4 shadow-[4px_5px_0_rgba(0,0,0,0.2)]">
+            <span className="tape tape-yellow left-6 top-[-12px] rotate-[-6deg]" />
+            <span className="tape tape-mint right-6 top-[-10px] rotate-[8deg] !w-14" />
+            <ul className="flex flex-col gap-1">
+              {NAV.map((n, i) => (
+                <li key={n.href} style={{ transform: `rotate(${i % 2 ? 0.6 : -0.6}deg)` }}>
+                  <a
+                    href={n.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-between rounded-md border-b-2 border-dashed border-[var(--ink)]/30 px-2 py-2 font-hand text-3xl leading-none hover:bg-[var(--pop-yellow)]"
+                  >
+                    <span>{n.label.toLowerCase()}</span>
+                    <span className="font-type text-[10px] tracking-widest text-muted-foreground">0{i + 1}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+              className="btn-scrap pink mt-4 w-full justify-center"
+            >
+              say hi ✿
+            </a>
+            <p className="mt-3 text-center font-marker text-xs text-muted-foreground">— flip the page —</p>
+          </div>
+        </div>
       </div>
     </header>
   );
@@ -109,19 +164,19 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative grid items-center gap-10 pt-14 pb-12 md:grid-cols-[1.2fr_1fr] md:pt-20">
+    <section id="top" className="relative grid items-center gap-8 pt-10 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
       <div className="relative">
-        <p className="font-type text-sm tracking-widest text-muted-foreground">
+        <p className="font-type text-[11px] tracking-widest text-muted-foreground sm:text-sm">
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
         </p>
-        <h1 className="mt-3 font-hand text-7xl leading-[0.95] md:text-8xl">
+        <h1 className="mt-3 font-hand text-5xl leading-[0.95] sm:text-6xl md:text-8xl">
           hey, I'm <span className="doodle-circle text-[oklch(0.5_0.18_25)]">Alex</span> —
           <br />
           I make <span className="highlight">web things</span>
           <br />
           that feel <span className="highlight-pink">human</span>.
         </h1>
-        <p className="mt-6 max-w-xl font-marker text-xl leading-relaxed">
+        <p className="mt-5 max-w-xl font-marker text-lg leading-relaxed sm:text-xl">
           Full-stack dev with a front-end flair. Studying AI & robotics at USIU-Africa,
           trained at Moringa. I turn curious ideas into apps people actually enjoy using.
         </p>
@@ -139,29 +194,29 @@ function Hero() {
 
 function HeroCollage() {
   return (
-    <div className="relative mx-auto h-[440px] w-full max-w-md">
+    <div className="relative mx-auto h-[360px] w-full max-w-md sm:h-[420px] md:h-[440px]">
       <span aria-hidden className="doodle-gojo -left-16 -top-6 hidden md:block" />
       <span aria-hidden className="doodle-aang -right-14 bottom-[-30px] hidden md:block" />
       {/* Big polaroid */}
-      <div className="polaroid absolute left-6 top-2 w-64 -rotate-[6deg] animate-sway">
+      <div className="polaroid absolute left-2 top-2 w-52 -rotate-[6deg] animate-sway sm:left-6 sm:w-64">
         <span className="tape tape-yellow left-1/2 top-[-12px] -translate-x-1/2 rotate-[-3deg]" />
-        <img src={avatar} alt="Alex Njugi Karanja" width={640} height={768} className="h-56 w-full object-cover" />
+        <img src={avatar} alt="Alex Njugi Karanja" width={640} height={768} className="h-44 w-full object-cover sm:h-56" />
         <p className="mt-3 text-center font-hand text-2xl">that's me ✿</p>
       </div>
       {/* Small desk polaroid */}
-      <div className="polaroid absolute right-0 top-32 w-48 rotate-[7deg] animate-float">
+      <div className="polaroid absolute right-0 top-24 w-40 rotate-[7deg] animate-float sm:top-32 sm:w-48">
         <span className="tape tape-blue left-3 top-[-10px] rotate-[-12deg]" />
-        <img src={desk} alt="My desk setup" width={768} height={640} loading="lazy" className="h-32 w-full object-cover" />
+        <img src={desk} alt="My desk setup" width={768} height={640} loading="lazy" className="h-28 w-full object-cover sm:h-32" />
         <p className="mt-2 text-center font-hand text-xl">my desk</p>
       </div>
       {/* Sticky note */}
-      <div className="sticky-note absolute bottom-2 left-0 w-52 rotate-[-4deg] bg-[var(--pop-yellow)] p-4 font-marker text-base">
+      <div className="sticky-note absolute bottom-2 left-0 w-44 rotate-[-4deg] bg-[var(--pop-yellow)] p-3 font-marker text-sm sm:w-52 sm:p-4 sm:text-base">
         <span className="tape tape-pink left-1/2 top-[-10px] -translate-x-1/2 rotate-[3deg]" />
         "code with curiosity,<br />ship with care."
         <div className="mt-2 text-right font-hand text-xl">— a.n.k</div>
       </div>
       {/* Stamp circle */}
-      <div className="absolute -right-2 bottom-6 flex h-24 w-24 rotate-[14deg] items-center justify-center rounded-full border-4 border-dashed border-[oklch(0.5_0.18_25)] text-center font-type text-[10px] uppercase leading-tight text-[oklch(0.5_0.18_25)]">
+      <div className="absolute -right-1 bottom-4 flex h-20 w-20 rotate-[14deg] items-center justify-center rounded-full border-4 border-dashed border-[oklch(0.5_0.18_25)] text-center font-type text-[9px] uppercase leading-tight text-[oklch(0.5_0.18_25)] sm:-right-2 sm:bottom-6 sm:h-24 sm:w-24 sm:text-[10px]">
         made<br/>with<br/>love<br/>♡ 254
       </div>
     </div>
@@ -172,8 +227,8 @@ function Marquee() {
   const items = ["curious ✿", "playful ✺", "kind ❀", "precise ★", "shipping ✦", "learning ❉", "faith-led ✝", "Nairobi ♡"];
   const loop = [...items, ...items, ...items];
   return (
-    <div className="torn-edges-y marquee-fade relative my-10 overflow-hidden border-y-2 border-dashed border-[var(--ink)] bg-[var(--pop-yellow)]/60 py-3">
-      <div className="flex w-max animate-marquee gap-8 font-hand text-3xl">
+    <div className="torn-edges-y marquee-fade relative my-8 overflow-hidden border-y-2 border-dashed border-[var(--ink)] bg-[var(--pop-yellow)]/60 py-2 sm:my-10 sm:py-3">
+      <div className="flex w-max animate-marquee gap-6 font-hand text-2xl sm:gap-8 sm:text-3xl">
         {loop.map((t, i) => (
           <span key={i} className="whitespace-nowrap">{t}</span>
         ))}
@@ -184,16 +239,16 @@ function Marquee() {
 
 function About() {
   return (
-    <section id="about" className="relative grid gap-8 py-20 md:grid-cols-[1fr_1.4fr] md:items-start">
+    <section id="about" className="relative grid gap-8 py-14 md:grid-cols-[1fr_1.4fr] md:items-start md:py-20">
       <div className="relative">
         <SectionLabel>page 02 · about</SectionLabel>
-        <h2 className="mt-2 font-hand text-6xl">the<br/><span className="highlight-mint">short</span> story.</h2>
+        <h2 className="mt-2 font-hand text-5xl sm:text-6xl">the<br/><span className="highlight-mint">short</span> story.</h2>
         <div className="relative mt-8 inline-block">
           <span className="tape tape-mint left-1/2 top-[-12px] -translate-x-1/2 rotate-[-6deg]" />
-          <img src={nairobi} alt="Nairobi" width={768} height={768} loading="lazy" className="polaroid h-56 w-56 -rotate-[3deg] object-cover" />
+          <img src={nairobi} alt="Nairobi" width={768} height={768} loading="lazy" className="polaroid h-48 w-48 -rotate-[3deg] object-cover sm:h-56 sm:w-56" />
         </div>
       </div>
-      <div className="relative lined-paper paper-card-torn -rotate-[0.4deg] !p-10 font-marker text-xl leading-9">
+      <div className="relative lined-paper paper-card-torn -rotate-[0.4deg] !p-6 font-marker text-lg leading-8 sm:!p-10 sm:text-xl sm:leading-9">
         <p>
           I'm a full-stack dev with a strong flair for <span className="highlight">front-end design</span>.
           Curiosity is my engine — I love turning rough ideas into apps that feel kind to use.
@@ -218,15 +273,15 @@ function About() {
 
 function Stack() {
   return (
-    <section id="stack" className="relative py-20">
+    <section id="stack" className="relative py-14 md:py-20">
       <SectionLabel>page 03 · toolbox</SectionLabel>
-      <h2 className="mt-2 font-hand text-6xl">things glued to <span className="highlight">my desk</span>.</h2>
-      <p className="mt-3 max-w-2xl font-marker text-xl text-muted-foreground">
+      <h2 className="mt-2 font-hand text-5xl sm:text-6xl">things glued to <span className="highlight">my desk</span>.</h2>
+      <p className="mt-3 max-w-2xl font-marker text-lg text-muted-foreground sm:text-xl">
         A mix of trusty web tech and the smart-systems side of things I'm studying.
       </p>
-      <div className="relative mt-10">
+      <div className="relative mt-8 md:mt-10">
         <img src={doodles} alt="" aria-hidden width={1024} height={512} loading="lazy" className="pointer-events-none absolute inset-0 h-full w-full -rotate-2 object-contain opacity-30" />
-        <ul className="relative flex flex-wrap gap-3">
+        <ul className="relative flex flex-wrap gap-2 sm:gap-3">
           {STACK.map((s, i) => {
             const tapes = ["tape-yellow", "tape-pink", "tape-blue", "tape-mint"];
             const rot = ((i * 53) % 11) - 5;
@@ -236,7 +291,7 @@ function Stack() {
               <li
                 key={s}
                 style={{ transform: `rotate(${rot}deg)`, marginLeft: ml, marginTop: mt, boxShadow: "3px 4px 0 rgba(0,0,0,0.15), 0 6px 12px -6px rgba(60,40,20,0.3)" }}
-                className="relative bg-[#fffdf6] px-4 py-2 font-hand text-2xl transition hover:-translate-y-1"
+                className="relative bg-[#fffdf6] px-3 py-1.5 font-hand text-xl transition hover:-translate-y-1 sm:px-4 sm:py-2 sm:text-2xl"
               >
                 <span
                   className={`tape ${tapes[i % 4]} left-1/2 top-[-10px] -translate-x-1/2 !w-12 !h-4`}
@@ -254,10 +309,10 @@ function Stack() {
 
 function Powers() {
   return (
-    <section id="powers" className="relative py-20">
+    <section id="powers" className="relative py-14 md:py-20">
       <SectionLabel>page 04 · superpowers</SectionLabel>
-      <h2 className="mt-2 font-hand text-6xl">what I bring to a <span className="highlight-pink">team</span>.</h2>
-      <div className="mt-10 grid gap-7 md:grid-cols-2">
+      <h2 className="mt-2 font-hand text-5xl sm:text-6xl">what I bring to a <span className="highlight-pink">team</span>.</h2>
+      <div className="mt-8 grid gap-6 sm:gap-7 md:mt-10 md:grid-cols-2">
         {SUPERPOWERS.map((p, i) => (
           <article
             key={p.title}
@@ -266,10 +321,10 @@ function Powers() {
           >
             <span className={`tape ${p.tape} left-1/2 top-[-12px] -translate-x-1/2 rotate-[-4deg]`} />
             <div className="flex items-start gap-4">
-              <span className="font-hand text-5xl leading-none text-[oklch(0.5_0.18_25)]">{p.emoji}</span>
+              <span className="font-hand text-4xl leading-none text-[oklch(0.5_0.18_25)] sm:text-5xl">{p.emoji}</span>
               <div>
-                <h3 className="font-hand text-3xl underline-doodle">{p.title}</h3>
-                <p className="mt-2 font-marker text-lg leading-7">{p.body}</p>
+                <h3 className="font-hand text-2xl underline-doodle sm:text-3xl">{p.title}</h3>
+                <p className="mt-2 font-marker text-base leading-7 sm:text-lg">{p.body}</p>
               </div>
             </div>
           </article>
@@ -281,26 +336,26 @@ function Powers() {
 
 function Journey() {
   return (
-    <section id="journey" className="relative py-20">
+    <section id="journey" className="relative py-14 md:py-20">
       <SectionLabel>page 05 · journey</SectionLabel>
-      <h2 className="mt-2 font-hand text-6xl">a few <span className="highlight-mint">stops</span> along the way.</h2>
-      <ol className="relative mt-10 grid gap-5 md:grid-cols-2">
+      <h2 className="mt-2 font-hand text-5xl sm:text-6xl">a few <span className="highlight-mint">stops</span> along the way.</h2>
+      <ol className="relative mt-8 grid gap-5 md:mt-10 md:grid-cols-2">
         {JOURNEY.map((j, i) => (
           <li
             key={j.year}
             style={{ transform: `rotate(${(i % 2 ? 1.6 : -1.8) + (i === 2 ? 0.7 : 0)}deg)`, marginTop: i > 1 ? "-0.6rem" : undefined }}
-            className="paper-card relative flex gap-4 transition hover:rotate-0"
+            className="paper-card relative flex gap-3 transition hover:rotate-0 sm:gap-4"
           >
             <span
               className={`tape ${["tape-yellow","tape-pink","tape-blue","tape-mint"][i % 4]} left-4 top-[-10px] !w-16`}
               style={{ transform: `rotate(${((i * 29) % 22) - 11}deg)` }}
             />
-            <div className="puffy-sticker flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-2xl">
+            <div className="puffy-sticker flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-xl sm:h-16 sm:w-16 sm:text-2xl">
               {j.year}
             </div>
-            <div>
-              <h3 className="font-hand text-2xl">{j.title}</h3>
-              <p className="font-marker text-lg">{j.body}</p>
+            <div className="min-w-0">
+              <h3 className="font-hand text-xl sm:text-2xl">{j.title}</h3>
+              <p className="font-marker text-base sm:text-lg">{j.body}</p>
             </div>
           </li>
         ))}
@@ -327,16 +382,16 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-20">
+    <section id="contact" className="relative py-14 md:py-20">
       <SectionLabel>page 06 · last page</SectionLabel>
-      <div className="mt-2 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
+      <div className="mt-2 grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
         <div>
-          <h2 className="font-hand text-6xl leading-[0.95] md:text-7xl">
+          <h2 className="font-hand text-5xl leading-[0.95] sm:text-6xl md:text-7xl">
             got an idea?<br/>
             <span className="highlight">let's glue it</span><br/>
             together. ✿
           </h2>
-          <p className="mt-6 max-w-xl font-marker text-xl">
+          <p className="mt-5 max-w-xl font-marker text-lg sm:text-xl">
             Available for freelance projects, collaborations, and challenges that push
             creativity and code further. I reply fast and ship faster.
           </p>
@@ -380,9 +435,9 @@ function Contact() {
 
 function ContactRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b-2 border-dashed border-[var(--ink)]/40 py-2 last:border-b-0">
+    <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b-2 border-dashed border-[var(--ink)]/40 py-2 last:border-b-0">
       <span className="font-hand text-lg text-muted-foreground">{label}</span>
-      <span className="text-right">{children}</span>
+      <span className="min-w-0 break-all text-right">{children}</span>
     </div>
   );
 }
@@ -392,9 +447,9 @@ function Footer() {
     <footer className="relative border-t-2 border-dashed border-[var(--ink)]/30">
       <span aria-hidden className="doodle-aang left-4 top-2 hidden md:block" style={{ width: 80, height: 96, opacity: 0.16 }} />
       <span aria-hidden className="doodle-gojo right-6 -top-4 hidden md:block" style={{ width: 90, height: 108, opacity: 0.16 }} />
-      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-8 text-center md:flex-row md:text-left">
-        <p className="font-marker text-base">© {new Date().getFullYear()} Alex Njugi Karanja · built with curiosity & coffee ☕</p>
-        <p className="font-hand text-2xl">the end · for now ✿</p>
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-8 text-center sm:px-5 md:flex-row md:text-left">
+        <p className="font-marker text-sm sm:text-base">© {new Date().getFullYear()} Alex Njugi Karanja · built with curiosity & coffee ☕</p>
+        <p className="font-hand text-xl sm:text-2xl">the end · for now ✿</p>
       </div>
     </footer>
   );
