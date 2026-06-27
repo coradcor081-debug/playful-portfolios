@@ -117,7 +117,7 @@ export function MusicPlayer() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-50 w-[300px] select-none"
+      className="fixed bottom-3 right-3 left-3 z-50 mx-auto w-auto max-w-[320px] select-none sm:left-auto sm:bottom-4 sm:right-4 sm:mx-0 sm:w-[300px]"
       style={{ transform: "rotate(-2deg)" }}
     >
       <div className="paper-card relative !p-3 !pt-4">
