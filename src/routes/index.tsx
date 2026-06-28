@@ -101,19 +101,19 @@ function Nav() {
           <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-type text-xs sm:h-9 sm:w-9 sm:text-sm">A</span>
           <span className="truncate">alex's scrapbook</span>
         </a>
-        <nav className="hidden gap-1 md:flex">
+        <nav className="hidden gap-1 lg:flex">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="rounded-full px-3 py-1 font-hand text-xl hover:bg-[var(--pop-yellow)]">
               {n.label}
             </a>
           ))}
         </nav>
-        <a href="#contact" className="btn-scrap pink hidden md:inline-flex">say hi ✿</a>
+        <a href="#contact" className="btn-scrap pink hidden lg:inline-flex">say hi ✿</a>
         <button
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] shadow-[2px_2px_0_rgba(0,0,0,0.2)] md:hidden"
+          className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] shadow-[2px_2px_0_rgba(0,0,0,0.2)] lg:hidden"
         >
           <span className="relative block h-4 w-5">
             <span className={`absolute left-0 right-0 h-[2.5px] rounded-full bg-[var(--ink)] transition-all ${menuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"}`} />
@@ -124,7 +124,7 @@ function Nav() {
       </div>
       {/* Mobile dropdown */}
       <div
-        className={`md:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`lg:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden={!menuOpen}
       >
         <div
@@ -164,7 +164,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative grid items-center gap-8 pt-10 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
+    <section id="top" className="relative grid items-center gap-8 pt-4 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
       <div className="relative">
         <p className="font-type text-[11px] tracking-widest text-muted-foreground sm:text-sm">
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
