@@ -153,6 +153,7 @@ function Nav() {
             <p className="mt-3 text-center font-marker text-xs text-muted-foreground">— flip the page —</p>
           </div>
         </div>
+        </div>
       )}
     </header>
   );
