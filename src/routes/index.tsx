@@ -161,7 +161,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative grid items-center gap-8 pt-4 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
+    <section id="top" className="relative grid items-center gap-8 pt-10 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
       <div className="relative">
         <p className="font-type text-[11px] tracking-widest text-muted-foreground sm:text-sm">
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
