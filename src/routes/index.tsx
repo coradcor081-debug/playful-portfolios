@@ -108,7 +108,7 @@ function Nav() {
             </a>
           ))}
         </nav>
-        <a href="#contact" className="btn-scrap pink hidden lg:inline-flex">say hi ✿</a>
+        <a href="#contact" className="btn-scrap pink !hidden lg:!inline-flex">say hi ✿</a>
         <button
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -123,13 +123,9 @@ function Nav() {
         </button>
       </div>
       {/* Mobile dropdown */}
-      <div
-        className={`lg:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-        aria-hidden={!menuOpen}
-      >
-        <div
-          className={`mt-2 origin-top transition-all duration-300 ${menuOpen ? "scale-y-100 opacity-100" : "scale-y-90 opacity-0"}`}
-        >
+      {menuOpen && (
+        <div className="lg:hidden" aria-hidden={!menuOpen}>
+          <div className="mt-2 origin-top animate-in zoom-in-95 fade-in duration-300">
           <div className="relative mx-auto max-w-md rounded-[10px] border-2 border-[var(--ink)] bg-[#fffdf6] p-4 shadow-[4px_5px_0_rgba(0,0,0,0.2)]">
             <span className="tape tape-yellow left-6 top-[-12px] rotate-[-6deg]" />
             <span className="tape tape-mint right-6 top-[-10px] rotate-[8deg] !w-14" />
@@ -157,7 +153,7 @@ function Nav() {
             <p className="mt-3 text-center font-marker text-xs text-muted-foreground">— flip the page —</p>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
