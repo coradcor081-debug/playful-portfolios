@@ -239,6 +239,8 @@ function Sticker({
 function Hero() {
   return (
     <section id="top" className="relative grid items-center gap-8 pt-14 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
+      <Sticker className="-top-4 right-6 hidden md:inline-flex" rotate={-16} bg="var(--pop-pink)">♡</Sticker>
+      <Sticker className="top-24 -left-6 hidden md:inline-flex" rotate={18} bg="var(--pop-blue)">✦</Sticker>
       <div className="relative">
         <p className="font-type text-[11px] tracking-widest text-muted-foreground sm:text-sm">
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
