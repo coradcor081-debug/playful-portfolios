@@ -221,7 +221,8 @@ function HeroCollage() {
 }
 
 function Marquee() {
-  const items = ["curious ✿", "playful ✺", "kind ❀", "precise ★", "shipping ✦", "learning ❉", "faith-led ✝", "Nairobi ♡"];
+  const items = ["love ✿", "joy ✺", "peace ❀", "patience ★", "kindness ✦", "goodness ❉", "faithfulness ✝", "gentleness ♡", "self-control ✧"];
+
   const loop = [...items, ...items, ...items];
   return (
     <div className="torn-edges-y marquee-fade relative my-8 overflow-hidden border-y-2 border-dashed border-[var(--ink)] bg-[var(--pop-yellow)]/60 py-2 sm:my-10 sm:py-3">
