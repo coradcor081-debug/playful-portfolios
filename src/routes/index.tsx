@@ -313,9 +313,57 @@ function Marquee() {
   );
 }
 
+function Snapshots() {
+  return (
+    <section id="snapshots" className="relative py-14 md:py-20">
+      <Sticker className="-top-2 right-4" rotate={-14} bg="var(--pop-pink)">🌸</Sticker>
+      <Sticker className="top-8 left-2" rotate={10} bg="var(--pop-blue)">🦋</Sticker>
+      <SectionLabel>page 02½ · sticker sheet</SectionLabel>
+      <h2 className="mt-2 font-hand text-5xl sm:text-6xl">
+        a few <span className="highlight">snapshots</span>.
+      </h2>
+      <p className="mt-3 max-w-2xl font-marker text-lg text-muted-foreground sm:text-xl">
+        Pinned to the page like polaroids on a corkboard. Swap them for your own in{" "}
+        <code className="font-type text-sm">src/data/scrapbook-photos.ts</code>.
+      </p>
+      <div className="relative mt-10 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-3">
+        {snapshots.map((s, i) => (
+          <figure
+            key={i}
+            className="polaroid relative"
+            style={{ transform: `rotate(${s.rotate}deg)` }}
+          >
+            <span className={`tape ${s.tape} left-1/2 top-[-12px] -translate-x-1/2 rotate-[-4deg]`} />
+            <img
+              src={s.src}
+              alt={s.alt}
+              loading="lazy"
+              className="h-36 w-full object-cover sm:h-44 md:h-48"
+            />
+            <figcaption className="mt-3 text-center font-hand text-xl">{s.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      {/* Ticket stub */}
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div
+          className="relative flex items-center gap-3 border-2 border-dashed border-[var(--ink)] bg-[#fffdf6] px-4 py-2 font-type text-xs uppercase tracking-widest"
+          style={{ transform: "rotate(-2deg)", boxShadow: "3px 4px 0 rgba(0,0,0,0.15)" }}
+        >
+          <span>Admit One</span>
+          <span className="h-6 border-l-2 border-dashed border-[var(--ink)]" />
+          <span>Alex's Scrapbook · No. 072</span>
+        </div>
+        <span className="stamp">printed with care</span>
+      </div>
+    </section>
+  );
+}
+
 function About() {
   return (
     <section id="about" className="relative grid gap-8 py-14 md:grid-cols-[1fr_1.4fr] md:items-start md:py-20">
+      <Sticker className="-top-2 -right-2 md:right-8" rotate={12} bg="var(--pop-lime)">✿</Sticker>
       <div className="relative">
         <SectionLabel>page 02 · about</SectionLabel>
         <h2 className="mt-2 font-hand text-5xl sm:text-6xl">the<br/><span className="highlight-mint">short</span> story.</h2>
