@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import avatar from "@/assets/alex-avatar.jpg";
 import doodles from "@/assets/doodles.png";
-import nairobi from "@/assets/nairobi.jpg";
-import desk from "@/assets/desk.jpg";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { heroPhotos, aboutPhoto, snapshots } from "@/data/scrapbook-photos";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -52,6 +50,7 @@ const SUPERPOWERS = [
 
 const NAV = [
   { href: "#about", label: "About" },
+  { href: "#snapshots", label: "Snapshots" },
   { href: "#stack", label: "Stack" },
   { href: "#powers", label: "Powers" },
   { href: "#journey", label: "Journey" },
@@ -74,6 +73,7 @@ function Index() {
         <Hero />
         <Marquee />
         <About />
+        <Snapshots />
         <Stack />
         <Powers />
         <Journey />
