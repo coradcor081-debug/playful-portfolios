@@ -159,6 +159,83 @@ function Nav() {
   );
 }
 
+// Ransom-note style cut-out letters — each character gets its own
+// font, color, background and tilt like a magazine-clipping collage.
+function RansomText({ text, size = "text-6xl sm:text-7xl md:text-8xl" }: { text: string; size?: string }) {
+  const palette = [
+    { bg: "#fffdf6", ink: "#0d0d0d", font: "var(--font-display)" },
+    { bg: "var(--pop-yellow)", ink: "#0d0d0d", font: "var(--font-mono)" },
+    { bg: "var(--pop-pink)", ink: "#0d0d0d", font: "'Times New Roman', serif" },
+    { bg: "#0d0d0d", ink: "#fffdf6", font: "var(--font-display)" },
+    { bg: "var(--pop-blue)", ink: "#0d0d0d", font: "Georgia, serif" },
+    { bg: "var(--pop-lime)", ink: "#0d0d0d", font: "var(--font-marker)" },
+    { bg: "var(--pop-purple)", ink: "#fffdf6", font: "Impact, sans-serif" },
+    { bg: "#fffdf6", ink: "oklch(0.5 0.18 25)", font: "'Courier New', monospace" },
+  ];
+  return (
+    <span className={`inline-flex flex-wrap items-end gap-[0.08em] align-baseline ${size}`}>
+      {Array.from(text).map((ch, i) => {
+        if (ch === " ") return <span key={i} className="w-3" />;
+        const p = palette[(i * 3 + ch.charCodeAt(0)) % palette.length];
+        const rot = ((i * 47) % 17) - 8;
+        const skew = ((i * 13) % 9) - 4;
+        const pad = i % 2 ? "0.05em 0.22em" : "0.02em 0.28em";
+        return (
+          <span
+            key={i}
+            className="relative inline-block leading-none"
+            style={{
+              background: p.bg,
+              color: p.ink,
+              fontFamily: p.font,
+              fontWeight: 900,
+              padding: pad,
+              transform: `rotate(${rot}deg) skewX(${skew}deg)`,
+              boxShadow: "2px 3px 0 rgba(0,0,0,0.18), 0 6px 10px -6px rgba(60,40,20,0.35)",
+              clipPath:
+                i % 3 === 0
+                  ? "polygon(2% 6%, 98% 0%, 100% 94%, 4% 100%)"
+                  : i % 3 === 1
+                    ? "polygon(0% 10%, 96% 4%, 100% 92%, 6% 100%, 2% 50%)"
+                    : "polygon(4% 0%, 100% 8%, 96% 96%, 0% 100%)",
+            }}
+          >
+            {ch.toUpperCase()}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+// Tiny corner stickers — pure CSS/emoji, no image deps.
+function Sticker({
+  children,
+  className = "",
+  rotate = 0,
+  bg = "var(--pop-yellow)",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  rotate?: number;
+  bg?: string;
+}) {
+  return (
+    <span
+      aria-hidden
+      className={`puffy-sticker pointer-events-none absolute inline-flex items-center justify-center rounded-full border-2 border-[var(--ink)] text-2xl ${className}`}
+      style={{
+        background: bg,
+        transform: `rotate(${rotate}deg)`,
+        width: "3.25rem",
+        height: "3.25rem",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="relative grid items-center gap-8 pt-14 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
@@ -166,12 +243,13 @@ function Hero() {
         <p className="font-type text-[11px] tracking-widest text-muted-foreground sm:text-sm">
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
         </p>
-        <h1 className="mt-3 font-hand text-5xl leading-[0.95] sm:text-6xl md:text-8xl">
-          hey, I'm <span className="doodle-circle text-[oklch(0.5_0.18_25)]">Alex</span> —
-          <br />
-          I make <span className="highlight">web things</span>
-          <br />
-          that feel <span className="highlight-pink">human</span>.
+        <h1 className="mt-3 font-hand text-5xl leading-[1.05] sm:text-6xl md:text-8xl">
+          <span className="block">hey, I'm</span>
+          <span className="my-2 block">
+            <RansomText text="ALEX" size="text-6xl sm:text-7xl md:text-[7rem]" />
+          </span>
+          <span className="block">I make <span className="highlight">web things</span></span>
+          <span className="block">that feel <span className="highlight-pink">human</span>.</span>
         </h1>
         <p className="mt-5 max-w-xl font-marker text-lg leading-relaxed sm:text-xl">
           Full-stack dev with a front-end flair. Studying AI & robotics at USIU-Africa,
