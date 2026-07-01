@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import avatar from "@/assets/alex-avatar.jpg";
 import doodles from "@/assets/doodles.png";
-import nairobi from "@/assets/nairobi.jpg";
-import desk from "@/assets/desk.jpg";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { heroPhotos, aboutPhoto, snapshots } from "@/data/scrapbook-photos";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -52,6 +50,7 @@ const SUPERPOWERS = [
 
 const NAV = [
   { href: "#about", label: "About" },
+  { href: "#snapshots", label: "Snapshots" },
   { href: "#stack", label: "Stack" },
   { href: "#powers", label: "Powers" },
   { href: "#journey", label: "Journey" },
@@ -74,6 +73,7 @@ function Index() {
         <Hero />
         <Marquee />
         <About />
+        <Snapshots />
         <Stack />
         <Powers />
         <Journey />
@@ -159,19 +159,99 @@ function Nav() {
   );
 }
 
+// Ransom-note style cut-out letters — each character gets its own
+// font, color, background and tilt like a magazine-clipping collage.
+function RansomText({ text, size = "text-6xl sm:text-7xl md:text-8xl" }: { text: string; size?: string }) {
+  const palette = [
+    { bg: "#fffdf6", ink: "#0d0d0d", font: "var(--font-display)" },
+    { bg: "var(--pop-yellow)", ink: "#0d0d0d", font: "var(--font-mono)" },
+    { bg: "var(--pop-pink)", ink: "#0d0d0d", font: "'Times New Roman', serif" },
+    { bg: "#0d0d0d", ink: "#fffdf6", font: "var(--font-display)" },
+    { bg: "var(--pop-blue)", ink: "#0d0d0d", font: "Georgia, serif" },
+    { bg: "var(--pop-lime)", ink: "#0d0d0d", font: "var(--font-marker)" },
+    { bg: "var(--pop-purple)", ink: "#fffdf6", font: "Impact, sans-serif" },
+    { bg: "#fffdf6", ink: "oklch(0.5 0.18 25)", font: "'Courier New', monospace" },
+  ];
+  return (
+    <span className={`inline-flex flex-wrap items-end gap-[0.08em] align-baseline ${size}`}>
+      {Array.from(text).map((ch, i) => {
+        if (ch === " ") return <span key={i} className="w-3" />;
+        const p = palette[(i * 3 + ch.charCodeAt(0)) % palette.length];
+        const rot = ((i * 47) % 17) - 8;
+        const skew = ((i * 13) % 9) - 4;
+        const pad = i % 2 ? "0.05em 0.22em" : "0.02em 0.28em";
+        return (
+          <span
+            key={i}
+            className="relative inline-block leading-none"
+            style={{
+              background: p.bg,
+              color: p.ink,
+              fontFamily: p.font,
+              fontWeight: 900,
+              padding: pad,
+              transform: `rotate(${rot}deg) skewX(${skew}deg)`,
+              boxShadow: "2px 3px 0 rgba(0,0,0,0.18), 0 6px 10px -6px rgba(60,40,20,0.35)",
+              clipPath:
+                i % 3 === 0
+                  ? "polygon(2% 6%, 98% 0%, 100% 94%, 4% 100%)"
+                  : i % 3 === 1
+                    ? "polygon(0% 10%, 96% 4%, 100% 92%, 6% 100%, 2% 50%)"
+                    : "polygon(4% 0%, 100% 8%, 96% 96%, 0% 100%)",
+            }}
+          >
+            {ch.toUpperCase()}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+// Tiny corner stickers — pure CSS/emoji, no image deps.
+function Sticker({
+  children,
+  className = "",
+  rotate = 0,
+  bg = "var(--pop-yellow)",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  rotate?: number;
+  bg?: string;
+}) {
+  return (
+    <span
+      aria-hidden
+      className={`puffy-sticker pointer-events-none absolute inline-flex items-center justify-center rounded-full border-2 border-[var(--ink)] text-2xl ${className}`}
+      style={{
+        background: bg,
+        transform: `rotate(${rotate}deg)`,
+        width: "3.25rem",
+        height: "3.25rem",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="relative grid items-center gap-8 pt-14 pb-10 md:grid-cols-[1.2fr_1fr] md:gap-10 md:pt-20 md:pb-12">
+      <Sticker className="-top-4 right-6 hidden md:inline-flex" rotate={-16} bg="var(--pop-pink)">♡</Sticker>
+      <Sticker className="top-24 -left-6 hidden md:inline-flex" rotate={18} bg="var(--pop-blue)">✦</Sticker>
       <div className="relative">
         <p className="font-type text-[11px] tracking-widest text-muted-foreground sm:text-sm">
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
         </p>
-        <h1 className="mt-3 font-hand text-5xl leading-[0.95] sm:text-6xl md:text-8xl">
-          hey, I'm <span className="doodle-circle text-[oklch(0.5_0.18_25)]">Alex</span> —
-          <br />
-          I make <span className="highlight">web things</span>
-          <br />
-          that feel <span className="highlight-pink">human</span>.
+        <h1 className="mt-3 font-hand text-5xl leading-[1.05] sm:text-6xl md:text-8xl">
+          <span className="block">hey, I'm</span>
+          <span className="my-2 block">
+            <RansomText text="ALEX" size="text-6xl sm:text-7xl md:text-[7rem]" />
+          </span>
+          <span className="block">I make <span className="highlight">web things</span></span>
+          <span className="block">that feel <span className="highlight-pink">human</span>.</span>
         </h1>
         <p className="mt-5 max-w-xl font-marker text-lg leading-relaxed sm:text-xl">
           Full-stack dev with a front-end flair. Studying AI & robotics at USIU-Africa,
@@ -197,14 +277,14 @@ function HeroCollage() {
       {/* Big polaroid */}
       <div className="polaroid absolute left-2 top-2 w-52 -rotate-[6deg] animate-sway sm:left-6 sm:w-64">
         <span className="tape tape-yellow left-1/2 top-[-12px] -translate-x-1/2 rotate-[-3deg]" />
-        <img src={avatar} alt="Alex Njugi Karanja" width={640} height={768} className="h-44 w-full object-cover sm:h-56" />
-        <p className="mt-3 text-center font-hand text-2xl">that's me ✿</p>
+        <img src={heroPhotos.self.src} alt={heroPhotos.self.alt} width={640} height={768} className="h-44 w-full object-cover sm:h-56" />
+        <p className="mt-3 text-center font-hand text-2xl">{heroPhotos.self.caption}</p>
       </div>
       {/* Small desk polaroid */}
       <div className="polaroid absolute right-0 top-24 w-40 rotate-[7deg] animate-float sm:top-32 sm:w-48">
         <span className="tape tape-blue left-3 top-[-10px] rotate-[-12deg]" />
-        <img src={desk} alt="My desk setup" width={768} height={640} loading="lazy" className="h-28 w-full object-cover sm:h-32" />
-        <p className="mt-2 text-center font-hand text-xl">my desk</p>
+        <img src={heroPhotos.desk.src} alt={heroPhotos.desk.alt} width={768} height={640} loading="lazy" className="h-28 w-full object-cover sm:h-32" />
+        <p className="mt-2 text-center font-hand text-xl">{heroPhotos.desk.caption}</p>
       </div>
       {/* Sticky note */}
       <div className="sticky-note absolute bottom-2 left-0 w-44 rotate-[-4deg] bg-[var(--pop-yellow)] p-3 font-marker text-sm sm:w-52 sm:p-4 sm:text-base">
@@ -235,15 +315,63 @@ function Marquee() {
   );
 }
 
+function Snapshots() {
+  return (
+    <section id="snapshots" className="relative py-14 md:py-20">
+      <Sticker className="-top-2 right-4" rotate={-14} bg="var(--pop-pink)">🌸</Sticker>
+      <Sticker className="top-8 left-2" rotate={10} bg="var(--pop-blue)">🦋</Sticker>
+      <SectionLabel>page 02½ · sticker sheet</SectionLabel>
+      <h2 className="mt-2 font-hand text-5xl sm:text-6xl">
+        a few <span className="highlight">snapshots</span>.
+      </h2>
+      <p className="mt-3 max-w-2xl font-marker text-lg text-muted-foreground sm:text-xl">
+        Pinned to the page like polaroids on a corkboard. Swap them for your own in{" "}
+        <code className="font-type text-sm">src/data/scrapbook-photos.ts</code>.
+      </p>
+      <div className="relative mt-10 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-3">
+        {snapshots.map((s, i) => (
+          <figure
+            key={i}
+            className="polaroid relative"
+            style={{ transform: `rotate(${s.rotate}deg)` }}
+          >
+            <span className={`tape ${s.tape} left-1/2 top-[-12px] -translate-x-1/2 rotate-[-4deg]`} />
+            <img
+              src={s.src}
+              alt={s.alt}
+              loading="lazy"
+              className="h-36 w-full object-cover sm:h-44 md:h-48"
+            />
+            <figcaption className="mt-3 text-center font-hand text-xl">{s.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      {/* Ticket stub */}
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div
+          className="relative flex items-center gap-3 border-2 border-dashed border-[var(--ink)] bg-[#fffdf6] px-4 py-2 font-type text-xs uppercase tracking-widest"
+          style={{ transform: "rotate(-2deg)", boxShadow: "3px 4px 0 rgba(0,0,0,0.15)" }}
+        >
+          <span>Admit One</span>
+          <span className="h-6 border-l-2 border-dashed border-[var(--ink)]" />
+          <span>Alex's Scrapbook · No. 072</span>
+        </div>
+        <span className="stamp">printed with care</span>
+      </div>
+    </section>
+  );
+}
+
 function About() {
   return (
     <section id="about" className="relative grid gap-8 py-14 md:grid-cols-[1fr_1.4fr] md:items-start md:py-20">
+      <Sticker className="-top-2 -right-2 md:right-8" rotate={12} bg="var(--pop-lime)">✿</Sticker>
       <div className="relative">
         <SectionLabel>page 02 · about</SectionLabel>
         <h2 className="mt-2 font-hand text-5xl sm:text-6xl">the<br/><span className="highlight-mint">short</span> story.</h2>
         <div className="relative mt-8 inline-block">
           <span className="tape tape-mint left-1/2 top-[-12px] -translate-x-1/2 rotate-[-6deg]" />
-          <img src={nairobi} alt="Nairobi" width={768} height={768} loading="lazy" className="polaroid h-48 w-48 -rotate-[3deg] object-cover sm:h-56 sm:w-56" />
+          <img src={aboutPhoto.src} alt={aboutPhoto.alt} width={768} height={768} loading="lazy" className="polaroid h-48 w-48 -rotate-[3deg] object-cover sm:h-56 sm:w-56" />
         </div>
       </div>
       <div className="relative lined-paper paper-card-torn -rotate-[0.4deg] !p-6 font-marker text-lg leading-8 sm:!p-10 sm:text-xl sm:leading-9">
