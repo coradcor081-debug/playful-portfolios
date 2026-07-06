@@ -162,15 +162,49 @@ function Nav() {
 // Ransom-note style cut-out letters — each character gets its own
 // font, color, background and tilt like a magazine-clipping collage.
 function RansomText({ text, size = "text-6xl sm:text-7xl md:text-8xl" }: { text: string; size?: string }) {
+  // Vibrant magazine-clipping palette — bold colors, ink contrasts,
+  // a couple of textured/patterned backgrounds for scrapbook feel.
   const palette = [
-    { bg: "#fffdf6", ink: "#0d0d0d", font: "var(--font-display)" },
-    { bg: "var(--pop-yellow)", ink: "#0d0d0d", font: "var(--font-mono)" },
-    { bg: "var(--pop-pink)", ink: "#0d0d0d", font: "'Times New Roman', serif" },
-    { bg: "#0d0d0d", ink: "#fffdf6", font: "var(--font-display)" },
-    { bg: "var(--pop-blue)", ink: "#0d0d0d", font: "Georgia, serif" },
-    { bg: "var(--pop-lime)", ink: "#0d0d0d", font: "var(--font-marker)" },
-    { bg: "var(--pop-purple)", ink: "#fffdf6", font: "Impact, sans-serif" },
-    { bg: "#fffdf6", ink: "oklch(0.5 0.18 25)", font: "'Courier New', monospace" },
+    {
+      bg: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      ink: "#7a1f3d",
+      font: "'Times New Roman', serif",
+    },
+    {
+      bg: "#fff8e6",
+      ink: "#c8195a",
+      font: "Georgia, serif",
+    },
+    {
+      bg: "linear-gradient(135deg,#1e6091 0%,#3aa9c9 100%)",
+      ink: "#fffdf6",
+      font: "var(--font-display)",
+    },
+    {
+      bg: "#2b1e5c",
+      ink: "#f5c518",
+      font: "Impact, sans-serif",
+    },
+    {
+      bg: "linear-gradient(135deg,#ff5f6d 0%,#ffc371 100%)",
+      ink: "#0d0d0d",
+      font: "var(--font-marker)",
+    },
+    {
+      bg: "#0d0d0d",
+      ink: "#f7d046",
+      font: "var(--font-display)",
+    },
+    {
+      bg: "linear-gradient(135deg,#7b2ff7 0%,#f107a3 100%)",
+      ink: "#fffdf6",
+      font: "'Courier New', monospace",
+    },
+    {
+      bg: "#f5efe0",
+      ink: "#1e6091",
+      font: "var(--font-mono)",
+    },
   ];
   return (
     <span className={`inline-flex flex-wrap items-end gap-[0.08em] align-baseline ${size}`}>
@@ -191,7 +225,9 @@ function RansomText({ text, size = "text-6xl sm:text-7xl md:text-8xl" }: { text:
               fontWeight: 900,
               padding: pad,
               transform: `rotate(${rot}deg) skewX(${skew}deg)`,
-              boxShadow: "2px 3px 0 rgba(0,0,0,0.18), 0 6px 10px -6px rgba(60,40,20,0.35)",
+              boxShadow:
+                "3px 4px 0 rgba(0,0,0,0.22), 0 10px 18px -8px rgba(60,40,20,0.45)",
+              textShadow: "0 1px 0 rgba(0,0,0,0.08)",
               clipPath:
                 i % 3 === 0
                   ? "polygon(2% 6%, 98% 0%, 100% 94%, 4% 100%)"
