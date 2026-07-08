@@ -10,6 +10,46 @@
 }
 .animate-bob { animation: bob 2.4s ease-in-out infinite; }
 
+/* --- Intro loader + reveal animations --- */
+@keyframes loader-dot-in {
+  0% { opacity: 0; transform: translateY(12px) scale(0.6); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes loader-monkey-in {
+  0% { opacity: 0; transform: translateY(-24px) scale(0.4) rotate(-20deg); }
+  60% { transform: translateY(4px) scale(1.15) rotate(6deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+@keyframes loader-text-cycle {
+  0% { opacity: 0; transform: translateY(8px); }
+  15%, 45% { opacity: 1; transform: translateY(0); }
+  60%, 100% { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes loader-fadeout {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes slide-in-top {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-bottom {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+  0% { opacity: 0; transform: translateX(-60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.reveal-top { animation: slide-in-top 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal-bottom { animation: slide-in-bottom 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal-left { animation: slide-in-left 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal-right { animation: slide-in-right 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
 /*
  * Design system definition.
  *

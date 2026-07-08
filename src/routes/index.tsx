@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import doodles from "@/assets/doodles.png";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { IntroLoader } from "@/components/IntroLoader";
 import avatar from "@/assets/alex-avatar.jpg";
 import desk from "@/assets/desk.jpg";
 import nairobi from "@/assets/nairobi.jpg";
@@ -67,21 +68,60 @@ const JOURNEY = [
 ];
 
 function Index() {
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    // Skip loader on subsequent navigations within the session
+    if (typeof window !== "undefined" && sessionStorage.getItem("introShown")) {
+      setLoaded(true);
+    }
+  }, []);
   return (
-    <div className="min-h-screen overflow-x-hidden text-foreground">
-      <Nav />
-      <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-5">
-        <Hero />
-        <Marquee />
-        <About />
-        <Stack />
-        <Powers />
-        <Journey />
-        <Contact />
-      </main>
-      <Footer />
-      <MusicPlayer />
-    </div>
+    <>
+      {!loaded && (
+        <IntroLoader
+          onDone={() => {
+            if (typeof window !== "undefined") sessionStorage.setItem("introShown", "1");
+            setLoaded(true);
+          }}
+        />
+      )}
+      <div className="min-h-screen overflow-x-hidden text-foreground">
+        {loaded && (
+          <>
+            <div className="reveal-top">
+              <Nav />
+            </div>
+            <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-5">
+              <div className="reveal-left" style={{ animationDelay: "150ms" }}>
+                <Hero />
+              </div>
+              <div className="reveal-right" style={{ animationDelay: "300ms" }}>
+                <Marquee />
+              </div>
+              <div className="reveal-left" style={{ animationDelay: "400ms" }}>
+                <About />
+              </div>
+              <div className="reveal-right" style={{ animationDelay: "500ms" }}>
+                <Stack />
+              </div>
+              <div className="reveal-left" style={{ animationDelay: "600ms" }}>
+                <Powers />
+              </div>
+              <div className="reveal-right" style={{ animationDelay: "700ms" }}>
+                <Journey />
+              </div>
+              <div className="reveal-bottom" style={{ animationDelay: "800ms" }}>
+                <Contact />
+              </div>
+            </main>
+            <div className="reveal-bottom" style={{ animationDelay: "900ms" }}>
+              <Footer />
+            </div>
+            <MusicPlayer />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
