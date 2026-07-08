@@ -88,33 +88,33 @@ function Index() {
       <div className="min-h-screen overflow-x-hidden text-foreground">
         {loaded && (
           <>
-            <div className="reveal-top">
+            <div className="reveal-top" style={{ animationDelay: "100ms" }}>
               <Nav />
             </div>
             <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-5">
-              <div className="reveal-left" style={{ animationDelay: "150ms" }}>
+              <div className="reveal-left" style={{ animationDelay: "500ms" }}>
                 <Hero />
               </div>
-              <div className="reveal-right" style={{ animationDelay: "300ms" }}>
+              <div className="reveal-right" style={{ animationDelay: "900ms" }}>
                 <Marquee />
               </div>
-              <div className="reveal-left" style={{ animationDelay: "400ms" }}>
+              <div className="reveal-left" style={{ animationDelay: "1200ms" }}>
                 <About />
               </div>
-              <div className="reveal-right" style={{ animationDelay: "500ms" }}>
+              <div className="reveal-right" style={{ animationDelay: "1500ms" }}>
                 <Stack />
               </div>
-              <div className="reveal-left" style={{ animationDelay: "600ms" }}>
+              <div className="reveal-left" style={{ animationDelay: "1800ms" }}>
                 <Powers />
               </div>
-              <div className="reveal-right" style={{ animationDelay: "700ms" }}>
+              <div className="reveal-right" style={{ animationDelay: "2100ms" }}>
                 <Journey />
               </div>
-              <div className="reveal-bottom" style={{ animationDelay: "800ms" }}>
+              <div className="reveal-bottom" style={{ animationDelay: "2400ms" }}>
                 <Contact />
               </div>
             </main>
-            <div className="reveal-bottom" style={{ animationDelay: "900ms" }}>
+            <div className="reveal-bottom" style={{ animationDelay: "2700ms" }}>
               <Footer />
             </div>
             <MusicPlayer />
