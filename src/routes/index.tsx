@@ -289,7 +289,7 @@ function Hero() {
           <span className="my-2 block">
             <RansomText text="ALEX" size="text-6xl sm:text-7xl md:text-[7rem]" />
           </span>
-          <span className="block">Look at all the cool stuff I built! 😁</span>
+          <span className="block">I build cool stuff! 😁</span>
         </h1>
         <p className="mt-5 max-w-xl font-marker text-lg leading-relaxed sm:text-xl">
           Full-stack dev with a front-end flair. Studying AI & robotics at USIU-Africa,
