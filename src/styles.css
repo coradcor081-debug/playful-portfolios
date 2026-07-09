@@ -462,6 +462,48 @@
     100% { transform: scaleY(1); }
   }
 
+  /* Emoji sticker in hero heading */
+  .emoji-sticker {
+    display: inline-block;
+    vertical-align: baseline;
+    transform-origin: center bottom;
+    will-change: transform;
+    animation:
+      emoji-drop 800ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+      emoji-blink 12s ease-in-out 1.2s infinite;
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .emoji-sticker:hover,
+  .emoji-sticker:focus-visible {
+    animation: emoji-hover 320ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes emoji-drop {
+    0% { opacity: 0; transform: translateY(-80%) scale(0.8) rotate(-12deg); }
+    60% { transform: translateY(10%) scale(1.08) rotate(4deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  }
+  @keyframes emoji-blink {
+    0%, 48% { transform: scaleY(1); }
+    48.75% { transform: scaleY(0.88); }
+    49.5%, 100% { transform: scaleY(1); }
+  }
+  @keyframes emoji-hover {
+    0% { transform: rotate(0deg) scale(1); }
+    30% { transform: rotate(-6deg) scale(1.06); }
+    60% { transform: rotate(12deg) scale(1.12); }
+    100% { transform: rotate(10deg) scale(1.1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .emoji-sticker,
+    .emoji-sticker:hover,
+    .emoji-sticker:focus-visible {
+      animation: none;
+      transform: none;
+      transition: none;
+    }
+  }
+
+
   /* Scrapbook range slider */
   .scrap-range {
     -webkit-appearance: none;
