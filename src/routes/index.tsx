@@ -69,12 +69,6 @@ const JOURNEY = [
 
 function Index() {
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    // Skip loader on subsequent navigations within the session
-    if (typeof window !== "undefined" && sessionStorage.getItem("introShown")) {
-      setLoaded(true);
-    }
-  }, []);
   return (
     <>
       {!loaded && (
