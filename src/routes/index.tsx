@@ -74,7 +74,6 @@ function Index() {
       {!loaded && (
         <IntroLoader
           onDone={() => {
-            if (typeof window !== "undefined") sessionStorage.setItem("introShown", "1");
             setLoaded(true);
           }}
         />
