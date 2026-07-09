@@ -285,16 +285,15 @@ function Hero() {
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
         </p>
         <h1 className="mt-3 font-hand text-5xl leading-[1.05] sm:text-6xl md:text-8xl">
-          <span className="block">hey, I'm</span>
+          <span className="block">Hey, I'm</span>
           <span className="my-2 block">
             <RansomText text="ALEX" size="text-6xl sm:text-7xl md:text-[7rem]" />
           </span>
-          <span className="block">I make <span className="highlight">web things</span></span>
-          <span className="block">that feel <span className="highlight-pink">human</span>.</span>
+          <span className="block">Look at all the cool stuff I built! 😁</span>
         </h1>
         <p className="mt-5 max-w-xl font-marker text-lg leading-relaxed sm:text-xl">
           Full-stack dev with a front-end flair. Studying AI & robotics at USIU-Africa,
-          trained at Moringa. I turn curious ideas into apps people actually enjoy using.
+          trained at Moringa. I turn curious ideas into tools people enjoy using.
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-3">
           <a href="#contact" className="btn-scrap pink">let's build →</a>
