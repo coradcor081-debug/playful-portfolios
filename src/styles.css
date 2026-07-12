@@ -12,9 +12,8 @@ body::before {
   background-image: url("./assets/bg-doodles.jpg");
   background-repeat: repeat;
   background-size: 780px auto;
-  opacity: 1;
+  opacity: 0.95;
   mix-blend-mode: multiply;
-  filter: contrast(1.35) saturate(1.1);
 }
 
 @custom-variant dark (&:is(.dark *));
