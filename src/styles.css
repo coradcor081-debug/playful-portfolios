@@ -8,14 +8,13 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
   background-image: url("./assets/bg-doodles.jpg");
   background-repeat: repeat;
-  background-size: 900px auto;
-  opacity: 0.42;
+  background-size: 780px auto;
+  opacity: 0.95;
   mix-blend-mode: multiply;
 }
-body > * { position: relative; z-index: 1; }
 
 @custom-variant dark (&:is(.dark *));
 
