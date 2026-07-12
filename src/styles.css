@@ -2,6 +2,21 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Hand-drawn doodle background layer (monkeys, meerkats, cats, stars, hearts…) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("./assets/bg-doodles.jpg");
+  background-repeat: repeat;
+  background-size: 900px auto;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+}
+body > * { position: relative; z-index: 1; }
+
 @custom-variant dark (&:is(.dark *));
 
 @keyframes bob {
