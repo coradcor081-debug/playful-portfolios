@@ -9,11 +9,10 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  background-image: url("./assets/bg-doodles.jpg");
+  background-image: url("/__l5e/assets-v1/ced1d79c-df6d-4508-9562-b0cfe957d6f1/bg-doodles.png");
   background-repeat: repeat;
-  background-size: 780px auto;
-  opacity: 0.95;
-  mix-blend-mode: multiply;
+  background-size: 1400px auto;
+  opacity: 1;
 }
 
 @custom-variant dark (&:is(.dark *));
