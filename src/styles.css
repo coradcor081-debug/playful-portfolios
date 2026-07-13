@@ -9,9 +9,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  background-image: url("/__l5e/assets-v1/af2a6a05-37d3-4f71-9595-c5dfda8074d9/fadedback.png");
-  background-repeat: repeat;
-  background-size: 1400px auto;
+  background-image: url("/__l5e/assets-v1/ba05c23c-15f4-4da3-811a-0fbfde6b82b1/faded3back.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   opacity: 1;
 }
 
