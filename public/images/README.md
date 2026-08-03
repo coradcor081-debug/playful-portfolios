@@ -1,5 +1,6 @@
-# Background image
+# Background images
 
-The site background lives here: `public/images/background.png`
+- Desktop / laptop: `public/images/background.png`
+- Phones / small screens (≤767px): `public/images/background-mobile.png`
 
-To change it, replace that file (keep the same name) or upload a new file and update the URL in `src/styles.css` (`body::before { background-image: url("/images/background.png") }`).
+To change either, replace the file (keep the same name), or update the URLs in `src/styles.css` (`body::before` and the `@media (max-width: 767px)` block).
