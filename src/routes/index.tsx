@@ -60,11 +60,11 @@ const NAV = [
 ];
 
 const JOURNEY = [
-  { year: "Early 2025", title: "Hello, world", body: "Curiosity kicked in. Late nights with HTML, CSS & JavaScript." },
-  { year: "Mid 2025", title: "Moringa School", body: "Trained deeply in React, Node, Python & Flask. Shipped my first real apps." },
-  { year: "Late 2025", title: "USIU-Africa", body: "Began BSc in AI & Robotics. Diving into ML, computer vision, NLP." },
-  { year: "2026", title: "Freelance + collabs", body: "Started taking on freelance projects for startups and individuals." },
-  { year: "Now", title: "Building things people love", body: "Available for freelance + collabs. Let's create something good." },
+  { mark: "'25", year: "Early 2025", title: "Hello, world", body: "Curiosity kicked in. Late nights with HTML, CSS & JavaScript." },
+  { mark: "'25", year: "Mid 2025", title: "Moringa School", body: "Trained deeply in React, Node, Python & Flask. Shipped my first real apps." },
+  { mark: "'25", year: "Late 2025", title: "USIU-Africa", body: "Began BSc in AI & Robotics. Diving into ML, computer vision, NLP." },
+  { mark: "'26", year: "2026", title: "Freelance + collabs", body: "Started taking on freelance projects for startups and individuals." },
+  { mark: "Now", year: "Right now", title: "Building things people love", body: "Available for freelance + collabs. Let's create something good." },
 ];
 
 function Index() {
