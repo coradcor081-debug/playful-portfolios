@@ -466,10 +466,11 @@ function Journey() {
               className={`tape ${["tape-yellow","tape-pink","tape-blue","tape-mint"][i % 4]} left-4 top-[-10px] !w-16`}
               style={{ transform: `rotate(${((i * 29) % 22) - 11}deg)` }}
             />
-            <div className="puffy-sticker flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-xl sm:h-16 sm:w-16 sm:text-2xl">
-              {j.year}
+            <div className="puffy-sticker flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-lg sm:h-16 sm:w-16 sm:text-xl">
+              {j.mark}
             </div>
             <div className="min-w-0">
+              <p className="font-marker text-xs uppercase tracking-widest opacity-70 sm:text-sm">{j.year}</p>
               <h3 className="font-hand text-xl sm:text-2xl">{j.title}</h3>
               <p className="font-marker text-base sm:text-lg">{j.body}</p>
             </div>
