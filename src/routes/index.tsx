@@ -132,7 +132,7 @@ function Nav() {
         <span className="tape tape-pink left-1/2 top-[-12px] -translate-x-1/2 rotate-[-4deg]" />
         <a href="#top" className="flex min-w-0 items-center gap-2 font-hand text-2xl leading-none sm:text-3xl">
           <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-type text-xs sm:h-9 sm:w-9 sm:text-sm">A</span>
-          <span className="truncate">alex's scrapbook</span>
+          <span className="truncate">Ak’s Corner</span>
         </a>
         <nav className="hidden gap-1 lg:flex">
           {NAV.map((n) => (
