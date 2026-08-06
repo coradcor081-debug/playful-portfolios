@@ -380,8 +380,9 @@ function About() {
           purpose, and a genuine commitment to true excellence.
         </p>
         <p className="mt-4">
-          AMI-trained soft skills: clear comms, adaptability, emotional intelligence,
-          empathy-led leadership. The kind of teammate you actually want on a Friday deploy.
+          Backed by AMI-trained soft skills, I'm all about high EQ, clear comms, and smooth
+          execution. With certs in project planning and problem-solving, I keep team friction
+          low—making me the calm teammate you want on a wild Friday deploy. 😝
         </p>
       </div>
     </section>
