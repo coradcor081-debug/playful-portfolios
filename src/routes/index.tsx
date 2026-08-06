@@ -60,11 +60,11 @@ const NAV = [
 ];
 
 const JOURNEY = [
-  { year: "2022", title: "Hello, world", body: "Curiosity kicked in. Late nights with HTML, CSS & JavaScript." },
-  { year: "2023", title: "Moringa School", body: "Trained deeply in React, Node, Python & Flask. Shipped my first real apps." },
-  { year: "2024", title: "Freelance + collabs", body: "Started taking on freelance projects for startups and individuals." },
-  { year: "2025", title: "USIU-Africa", body: "Began BSc in AI & Robotics. Diving into ML, computer vision, NLP." },
-  { year: "Now", title: "Building things people love", body: "Available for freelance + collabs. Let's create something good." },
+  { mark: "'25", year: "Early 2025", title: "Hello, world", body: "Curiosity kicked in. Late nights with HTML, CSS & JavaScript." },
+  { mark: "'25", year: "Mid 2025", title: "Moringa School", body: "Trained deeply in React, Node, Python & Flask. Shipped my first real apps." },
+  { mark: "'25", year: "Late 2025", title: "USIU-Africa", body: "Began BSc in AI & Robotics. Diving into ML, computer vision, NLP." },
+  { mark: "'26", year: "2026", title: "Freelance + collabs", body: "Started taking on freelance projects for startups and individuals." },
+  { mark: "Now", year: "Right now", title: "Building things people love", body: "Available for freelance + collabs. Let's create something good." },
 ];
 
 function Index() {
@@ -466,10 +466,11 @@ function Journey() {
               className={`tape ${["tape-yellow","tape-pink","tape-blue","tape-mint"][i % 4]} left-4 top-[-10px] !w-16`}
               style={{ transform: `rotate(${((i * 29) % 22) - 11}deg)` }}
             />
-            <div className="puffy-sticker flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-xl sm:h-16 sm:w-16 sm:text-2xl">
-              {j.year}
+            <div className="puffy-sticker flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--pop-yellow)] font-hand text-lg sm:h-16 sm:w-16 sm:text-xl">
+              {j.mark}
             </div>
             <div className="min-w-0">
+              <p className="font-marker text-xs uppercase tracking-widest opacity-70 sm:text-sm">{j.year}</p>
               <h3 className="font-hand text-xl sm:text-2xl">{j.title}</h3>
               <p className="font-marker text-base sm:text-lg">{j.body}</p>
             </div>
