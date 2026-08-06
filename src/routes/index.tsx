@@ -375,8 +375,9 @@ function About() {
           ML, computer vision, NLP, embedded systems, ethical AI.
         </p>
         <p className="mt-4">
-          Beyond code, I'm a devoted Christian — saved by grace, walking daily with Christ.
-          Faith shapes how I work: integrity, humility, and excellence pursued with purpose.
+          Beyond code, I'm a devoted Christian — my life and work are deeply shaped by my
+          Christian faith, guiding me to approach every challenge with humility, integrity,
+          purpose, and a genuine commitment to true excellence.
         </p>
         <p className="mt-4">
           AMI-trained soft skills: clear comms, adaptability, emotional intelligence,
