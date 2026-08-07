@@ -382,7 +382,7 @@ function About() {
         <p className="mt-4">
           Backed by AMI-trained soft skills, I'm all about high EQ, clear comms, and smooth
           execution. With certs in project planning and problem-solving, I keep team friction
-          low—making me the calm teammate you want on a wild Friday deploy. 😝
+          low—making me the calm teammate you want on a wild Friday deploy. 🤪
         </p>
         <p className="mt-5 text-right font-hand text-xl">Ad Majorem Dei Gloriam ✝</p>
       </div>
