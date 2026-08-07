@@ -384,12 +384,7 @@ function About() {
           execution. With certs in project planning and problem-solving, I keep team friction
           low—making me the calm teammate you want on a wild Friday deploy. 😝
         </p>
-        <p
-          className="mt-5 text-right text-[0.78rem] tracking-[0.14em] text-ink/70"
-          style={{ fontFamily: "'Cormorant Garamond', 'Times New Roman', serif", fontStyle: "italic" }}
-        >
-          Ad Majorem Dei Gloriam ✝
-        </p>
+        <p className="mt-5 text-right font-hand text-xl">Ad Majorem Dei Gloriam ✝</p>
       </div>
     </section>
   );
