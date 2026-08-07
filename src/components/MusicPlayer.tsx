@@ -93,10 +93,12 @@ export function MusicPlayer() {
     />
   );
 
-  // Collapsed: floating beamed-note button matching the site's btn-scrap pink
-  if (!open) {
-    return (
-      <>
+  // Single persistent <audio> element lives at the root of the tree so toggling
+  // the panel never unmounts it (which would stop playback).
+  return (
+    <>
+      {audioEl}
+      {!open ? (
         <div className="fixed bottom-5 right-5 z-50 flex flex-col items-center animate-bob">
           <span className="mb-1 font-hand text-sm text-[var(--ink)]">Play music</span>
           <button
@@ -109,14 +111,8 @@ export function MusicPlayer() {
             <span className={playing ? "animate-spin-slow" : ""}>♫</span>
           </button>
         </div>
-        {audioEl}
-      </>
-    );
-  }
-
-
-  return (
-    <div
+      ) : (
+      <div
       className="fixed bottom-3 right-3 left-3 z-50 mx-auto w-auto max-w-[320px] select-none sm:left-auto sm:bottom-4 sm:right-4 sm:mx-0 sm:w-[300px]"
       style={{ transform: "rotate(-2deg)" }}
     >
@@ -282,9 +278,10 @@ export function MusicPlayer() {
             up next · {list[(idx + 1) % list.length].title}
           </p>
         )}
-        {audioEl}
       </div>
-    </div>
+      </div>
+      )}
+    </>
   );
 }
 
