@@ -568,7 +568,7 @@ function Footer() {
       <span aria-hidden className="doodle-aang left-4 top-2 hidden md:block" style={{ width: 80, height: 96, opacity: 0.16 }} />
       <span aria-hidden className="doodle-gojo right-6 -top-4 hidden md:block" style={{ width: 90, height: 108, opacity: 0.16 }} />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-8 text-center sm:px-5 md:flex-row md:text-left">
-        <p className="font-marker text-sm sm:text-base">© {new Date().getFullYear()} Alex Njugi Karanja · built with curiosity & coffee ☕</p>
+        <p className="font-marker text-sm sm:text-base">© {new Date().getFullYear()} Alex Njugi Karanja · keep growing ☕</p>
         <p className="font-hand text-xl sm:text-2xl">the end · for now ✿</p>
       </div>
     </footer>
