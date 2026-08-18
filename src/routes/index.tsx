@@ -309,7 +309,7 @@ function Hero() {
 
 function HeroCollage() {
   return (
-    <div className="relative mx-auto hidden h-[360px] w-full max-w-md md:block sm:h-[420px] md:h-[440px]">
+    <div className="relative mx-auto hidden h-[440px] w-full max-w-md md:block">
       <span aria-hidden className="doodle-gojo -left-16 -top-6 hidden md:block" />
       <span aria-hidden className="doodle-aang -right-14 bottom-[-30px] hidden md:block" />
       {/* Big polaroid */}
