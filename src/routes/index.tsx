@@ -285,11 +285,11 @@ function Hero() {
           ★ NAIROBI · KENYA · EST. ALWAYS LEARNING ★
         </p>
         <h1 className="mt-3 font-hand text-5xl leading-[1.05] sm:text-6xl md:text-8xl">
-          <span className="block">Hey, I'm</span>
-          <span className="my-2 block">
+          <span className="mb-2 block">Hey, I'm</span>
+          <span className="my-4 block md:my-2">
             <RansomText text="ALEX" size="text-6xl sm:text-7xl md:text-[7rem]" />
           </span>
-          <span className="block">I build cool stuff! <span className="emoji-sticker" aria-label="grinning face">😁</span></span>
+          <span className="mt-2 block">I build cool stuff! <span className="emoji-sticker" aria-label="grinning face">😁</span></span>
         </h1>
         <p className="mt-5 max-w-xl font-marker text-lg leading-relaxed sm:text-xl">
           Full-stack dev with a front-end flair. Studying AI & robotics at USIU-Africa,
@@ -299,7 +299,7 @@ function Hero() {
           <a href="#contact" className="btn-scrap pink">let's build →</a>
           <a href="https://github.com/alex-njugi" target="_blank" rel="noreferrer" className="btn-scrap">github ↗</a>
           <a href="#journey" className="btn-scrap blue">my story</a>
-          <span className="stamp scale-90 sm:scale-100">available · 2026</span>
+          <span className="stamp mt-3 scale-90 sm:mt-0 sm:scale-100">available · 2026</span>
         </div>
       </div>
       <HeroCollage />
@@ -309,7 +309,7 @@ function Hero() {
 
 function HeroCollage() {
   return (
-    <div className="relative mx-auto h-[360px] w-full max-w-md sm:h-[420px] md:h-[440px]">
+    <div className="relative mx-auto hidden h-[440px] w-full max-w-md md:block">
       <span aria-hidden className="doodle-gojo -left-16 -top-6 hidden md:block" />
       <span aria-hidden className="doodle-aang -right-14 bottom-[-30px] hidden md:block" />
       {/* Big polaroid */}
