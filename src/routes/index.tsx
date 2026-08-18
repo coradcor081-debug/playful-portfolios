@@ -299,7 +299,7 @@ function Hero() {
           <a href="#contact" className="btn-scrap pink">let's build →</a>
           <a href="https://github.com/alex-njugi" target="_blank" rel="noreferrer" className="btn-scrap">github ↗</a>
           <a href="#journey" className="btn-scrap blue">my story</a>
-          <span className="stamp">available · 2026</span>
+          <span className="stamp scale-90 sm:scale-100">available · 2026</span>
         </div>
       </div>
       <HeroCollage />
